@@ -408,7 +408,7 @@ def read_genes(filename,resolution,chromosome,start,end):
 							
 	if len(genes.keys()) ==0:
 		print >>sys.stderr, 'Gene File ('+filename+') has some missing values'
-		raise SystemExit
+		#raise SystemExit
 	
 	return genes,len(row_list)+1,row_genes
 
@@ -652,7 +652,7 @@ def HiCplotter(files=[],names=[],resolution=100000,chromosome='',output='',histo
 	h_end = []
 	
 	if highlights or lHighlights:
-		h_start,h_end,_,_,_ = read_bedGraph(highFile,resolution,chromosome)
+		h_start,h_end,_,h_color,_ = read_bedGraph(highFile,resolution,chromosome)
 	
 	rlength = len(files)-1 if compare and not pair else len(files)
 	
@@ -769,11 +769,11 @@ def HiCplotter(files=[],names=[],resolution=100000,chromosome='',output='',histo
 			if highlights:
 				for item in range(0,len(h_start)):
 					if dark: ax1.axvspan(h_start[item], h_end[item], facecolor='#78D400', alpha=0.30, linestyle='dashed')
-					else: ax1.axvspan(h_start[item], h_end[item], facecolor='g', alpha=0.10, linestyle='dashed')
+					else: ax1.axvspan(h_start[item], h_end[item], facecolor=h_color[item], alpha=0.10, linestyle='dashed')
 			if lHighlights:
 				for item in range(0,len(h_start)):
 					if dark: ax1.axhspan(h_start[item], h_end[item], facecolor='#78D400', alpha=0.30, linestyle='dashed')
-					else: ax1.axhspan(h_start[item], h_end[item], facecolor='g', alpha=0.10, linestyle='dashed')
+					else: ax1.axhspan(h_start[item], h_end[item], facecolor=h_color[item], alpha=0.10, linestyle='dashed')
 
 		rowcounter+=4
 		ax1.get_xaxis().set_label_coords(0.5,-0.125)
@@ -835,7 +835,7 @@ def HiCplotter(files=[],names=[],resolution=100000,chromosome='',output='',histo
 			if h_start > 0:
 				for item in range(0,len(h_start)):
 					if dark: ax2.axvspan(h_start[item], h_end[item], facecolor='#78D400', alpha=0.30, linestyle='dashed')
-					else: ax2.axvspan(h_start[item], h_end[item], facecolor='g', alpha=0.10, linestyle='dashed')
+					else: ax2.axvspan(h_start[item], h_end[item], facecolor=h_color[item], alpha=0.10, linestyle='dashed')
 			
 			ax2.spines['right'].set_visible(False)
 			ax2.spines['top'].set_visible(False)
@@ -879,7 +879,7 @@ def HiCplotter(files=[],names=[],resolution=100000,chromosome='',output='',histo
 			if h_start > 0:
 				for item in range(0,len(h_start)):
 					if dark: ax3.axvspan(h_start[item], h_end[item], facecolor='#78D400', alpha=0.30, linestyle='dashed')
-					else: ax3.axvspan(h_start[item], h_end[item], facecolor='g', alpha=0.10, linestyle='dashed')
+					else: ax3.axvspan(h_start[item], h_end[item], facecolor=h_color[item], alpha=0.10, linestyle='dashed')
 	
 			if spine > 0:
 				ax3.spines['right'].set_visible(False)
@@ -989,7 +989,7 @@ def HiCplotter(files=[],names=[],resolution=100000,chromosome='',output='',histo
 			if h_start > 0:
 				for item in range(0,len(h_start)):
 					if dark: ax3.axvspan(h_start[item], h_end[item], facecolor='#78D400', alpha=0.30, linestyle='dashed')
-					else: ax3.axvspan(h_start[item], h_end[item], facecolor='g', alpha=0.10, linestyle='dashed')
+					else: ax3.axvspan(h_start[item], h_end[item], facecolor=h_color[item], alpha=0.10, linestyle='dashed')
 			
 			ax3.spines['right'].set_visible(False)
 			ax3.spines['left'].set_visible(False)
@@ -1063,7 +1063,7 @@ def HiCplotter(files=[],names=[],resolution=100000,chromosome='',output='',histo
 					if h_start > 0:
 						for item in range(0,len(h_start)):
 							if dark: ax3.axvspan(h_start[item], h_end[item], facecolor='#78D400', alpha=0.30, linestyle='dashed')
-							else: ax3.axvspan(h_start[item], h_end[item], facecolor='g', alpha=0.10, linestyle='dashed')
+							else: ax3.axvspan(h_start[item], h_end[item], facecolor=h_color[item], alpha=0.10, linestyle='dashed')
 			
 					if spine > 0:
 						ax3.spines['right'].set_visible(False)
@@ -1190,7 +1190,7 @@ def HiCplotter(files=[],names=[],resolution=100000,chromosome='',output='',histo
 				if h_start > 0:
 					for item in range(0,len(h_start)):
 						if dark: ax3.axvspan(h_start[item], h_end[item], facecolor='#78D400', alpha=0.30, linestyle='dashed')
-						else: ax3.axvspan(h_start[item], h_end[item], facecolor='g', alpha=0.10, linestyle='dashed')
+						else: ax3.axvspan(h_start[item], h_end[item], facecolor=h_color[item], alpha=0.10, linestyle='dashed')
 		
 				if spine > 0:
 					ax3.spines['right'].set_visible(False)
@@ -1239,7 +1239,7 @@ def HiCplotter(files=[],names=[],resolution=100000,chromosome='',output='',histo
 				if h_start > 0:
 					for item in range(0,len(h_start)):
 						if dark: ax3.axvspan(h_start[item], h_end[item], facecolor='#78D400', alpha=0.30, linestyle='dashed')
-						else: ax3.axvspan(h_start[item], h_end[item], facecolor='g', alpha=0.10, linestyle='dashed')
+						else: ax3.axvspan(h_start[item], h_end[item], facecolor=h_color[item], alpha=0.10, linestyle='dashed')
 				
 				if spine > 0:
 					ax3.spines['right'].set_visible(False)
@@ -1279,7 +1279,7 @@ def HiCplotter(files=[],names=[],resolution=100000,chromosome='',output='',histo
 				if h_start > 0:
 					for item in range(0,len(h_start)):
 						if dark: ax3.axvspan(h_start[item], h_end[item], facecolor='#78D400', alpha=0.30, linestyle='dashed')
-						else: ax3.axvspan(h_start[item], h_end[item], facecolor='g', alpha=0.10, linestyle='dashed')
+						else: ax3.axvspan(h_start[item], h_end[item], facecolor=h_color[item], alpha=0.10, linestyle='dashed')
 				
 				if spine > 0:
 					ax3.spines['right'].set_visible(False)
@@ -1324,7 +1324,7 @@ def HiCplotter(files=[],names=[],resolution=100000,chromosome='',output='',histo
 				if h_start > 0:
 					for item in range(0,len(h_start)):
 						if dark: ax3.axvspan(h_start[item], h_end[item], facecolor='#78D400', alpha=0.30, linestyle='dashed')
-						else: ax3.axvspan(h_start[item], h_end[item], facecolor='g', alpha=0.10, linestyle='dashed')
+						else: ax3.axvspan(h_start[item], h_end[item], facecolor=h_color[item], alpha=0.10, linestyle='dashed')
 				
 				if spine > 0:
 					ax3.spines['right'].set_visible(False)
@@ -1404,7 +1404,7 @@ def HiCplotter(files=[],names=[],resolution=100000,chromosome='',output='',histo
 			if h_start > 0:
 				for item in range(0,len(h_start)):
 					if dark: ax4.axvspan(h_start[item], h_end[item], facecolor='#78D400', alpha=0.30, linestyle='dashed')
-					else: ax4.axvspan(h_start[item], h_end[item], facecolor='g', alpha=0.10, linestyle='dashed')
+					else: ax4.axvspan(h_start[item], h_end[item], facecolor=h_color[item], alpha=0.10, linestyle='dashed')
 				
 			if spine > 0:
 				ax4.spines['right'].set_visible(False)
@@ -1728,11 +1728,11 @@ def HiCplotter(files=[],names=[],resolution=100000,chromosome='',output='',histo
 			if highlights:
 				for item in range(0,len(h_start)):
 					if dark: ax1.axvspan(h_start[item], h_end[item], facecolor='#78D400', alpha=0.30, linestyle='dashed')
-					else: ax1.axvspan(h_start[item], h_end[item], facecolor='g', alpha=0.10, linestyle='dashed')
+					else: ax1.axvspan(h_start[item], h_end[item], facecolor=h_color[item], alpha=0.10, linestyle='dashed')
 			if lHighlights:
 				for item in range(0,len(h_start)):
 					if dark: ax1.axhspan(h_start[item], h_end[item], facecolor='#78D400', alpha=0.30, linestyle='dashed')
-					else: ax1.axhspan(h_start[item], h_end[item], facecolor='g', alpha=0.10, linestyle='dashed')		
+					else: ax1.axhspan(h_start[item], h_end[item], facecolor=h_color[item], alpha=0.10, linestyle='dashed')		
 		
 		ax1.get_xaxis().set_label_coords(0.5,-0.125)
 		if numOfrows == 4 and not randomBins:
@@ -1789,7 +1789,7 @@ def HiCplotter(files=[],names=[],resolution=100000,chromosome='',output='',histo
 			if h_start > 0:
 				for item in range(0,len(h_start)):
 					if dark: ax2.axvspan(h_start[item], h_end[item], facecolor='#78D400', alpha=0.30, linestyle='dashed')
-					else: ax2.axvspan(h_start[item], h_end[item], facecolor='g', alpha=0.10, linestyle='dashed')
+					else: ax2.axvspan(h_start[item], h_end[item], facecolor=h_color[item], alpha=0.10, linestyle='dashed')
 			
 			ax2.spines['right'].set_visible(False)
 			ax2.spines['top'].set_visible(False)
@@ -1887,7 +1887,7 @@ def HiCplotter(files=[],names=[],resolution=100000,chromosome='',output='',histo
 			if h_start > 0:
 				for item in range(0,len(h_start)):
 					if dark: ax3.axvspan(h_start[item], h_end[item], facecolor='#78D400', alpha=0.30, linestyle='dashed')
-					else: ax3.axvspan(h_start[item], h_end[item], facecolor='g', alpha=0.10, linestyle='dashed')
+					else: ax3.axvspan(h_start[item], h_end[item], facecolor=h_color[item], alpha=0.10, linestyle='dashed')
 			
 			ax3.spines['right'].set_visible(False)
 			ax3.spines['left'].set_visible(False)
@@ -1961,7 +1961,7 @@ def HiCplotter(files=[],names=[],resolution=100000,chromosome='',output='',histo
 					if h_start > 0:
 						for item in range(0,len(h_start)):
 							if dark: pax1.axvspan(h_start[item], h_end[item], facecolor='#78D400', alpha=0.30, linestyle='dashed')
-							else: pax1.axvspan(h_start[item], h_end[item], facecolor='g', alpha=0.10, linestyle='dashed')
+							else: pax1.axvspan(h_start[item], h_end[item], facecolor=h_color[item], alpha=0.10, linestyle='dashed')
 		
 					pax1.get_xaxis().set_label_coords(0.5,-0.125)
 					
